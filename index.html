@@ -5,34 +5,190 @@
 body{
   margin: 0px;
   padding: 0px;
+  overflow: hidden;
 }
 #content{
   margin: 0px;
   padding: 0px;
+  position: relative;
+}
+#content img{
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  position: absolute;
 }
 </style>
 </head>
 <body>
-  <div id="content">あああ</div>
+  <div id="content"></div>
 </body>
 <script>
+const CONTENT_OBJ = document.getElementById('content');
 const QUANTUM_CARD_DIR = 'img/quantum/';
 const QUANTUM_CARD_BACK_COVER_FILE = 'img/99.jpg';
 const QUANTUM_CARD_LIST = [
   {
-    file: '1.jpg',
     name: '',
     commentary: '',
+    face_up_file_name: '1.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
   },
   {
-    file: '2.jpg',
     name: '',
     commentary: '',
+    face_up_file_name: '2.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '3.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '4.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '5.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '6.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '7.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '8.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '9.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '10.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '11.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '12.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '13.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '14.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '15.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '16.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '17.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '18.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '19.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '20.jpg',
+    face_up_img_elm: document.createElement('img'),
+    face_down_img_elm: document.createElement('img'),
   },
 ];
 //console.log(QUANTUM_CARD_LIST);
-QUANTUM_CARD_LIST.forEach(element=>{
-  console.log(element);
+
+//初期設定
+QUANTUM_CARD_LIST.forEach((value, index)=>{
+  //表面の画像を設定
+  value.face_up_img_elm.src = QUANTUM_CARD_DIR + value.face_up_file_name;
+  value.face_up_img_elm.width = 100;
+  
+  //裏面の画像を設定
+  value.face_down_img_elm.src = QUANTUM_CARD_BACK_COVER_FILE;
+  value.face_up_img_elm.width = 100;
+  
+  //表示処理
+  let left_style = index * value.face_up_img_elm.width;
+  value.face_up_img_elm.style = 'left:'+left_style+'px';
+  CONTENT_OBJ.appendChild(value.face_up_img_elm);
 });
+
+//QUANTUM_CARD_LIST.forEach(element=>{
+//  CONTENT_OBJ.appendChild(element.img_elm);
+//});
 </script>
 </html>
