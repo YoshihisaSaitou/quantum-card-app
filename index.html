@@ -32,160 +32,304 @@ const QUANTUM_CARD_LIST = [
     name: '',
     commentary: '',
     face_up_file_name: '1.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '2.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '3.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '4.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '5.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '6.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '7.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '8.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '9.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '10.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '11.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '12.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '13.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '14.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '15.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '16.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '17.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '18.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '19.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
   {
     name: '',
     commentary: '',
     face_up_file_name: '20.jpg',
-    face_up_img_elm: document.createElement('img'),
-    face_down_img_elm: document.createElement('img'),
+    img_elm: document.createElement('img'),
   },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '21.jpg',
+    img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '22.jpg',
+    img_elm: document.createElement('img'),
+  },
+  {
+    name: '',
+    commentary: '',
+    face_up_file_name: '23.jpg',
+    img_elm: document.createElement('img'),
+  },
+  
 ];
 //console.log(QUANTUM_CARD_LIST);
+let centerX = 0;//中心座標x
+let centerY = 0;//中心座標y
+let scaleRatio = 1.0; //拡大縮小率
+let isMouseDown = false;//canvas ドラッグ中フラグ
+let startMouseDownX = 0;//canvas ドラッグ開始位置X
+let startMouseDownY = 0;//canvas 
+let startObjDownLeft = 0;//対象オブジェクトleft
+let startObjDownTop = 0;//対象オブジェクトtop
+let zIndexCount = 1;
 
-//初期設定
+//設定
 QUANTUM_CARD_LIST.forEach((value, index)=>{
   //表面の画像を設定
-  value.face_up_img_elm.src = QUANTUM_CARD_DIR + value.face_up_file_name;
-  value.face_up_img_elm.width = 100;
+  //value.img_elm.src = QUANTUM_CARD_DIR + value.face_up_file_name;
+  //value.img_elm.width = 100;
   
   //裏面の画像を設定
-  value.face_down_img_elm.src = QUANTUM_CARD_BACK_COVER_FILE;
-  value.face_up_img_elm.width = 100;
+  //value.img_elm.src = QUANTUM_CARD_BACK_COVER_FILE;
+  //value.img_elm.width = 100;
+  
+  //画像を設定
+  value.img_elm.src = QUANTUM_CARD_BACK_COVER_FILE;
+  value.img_elm.width = 100;
+  
   
   //表示処理
-  let left_style = index * value.face_up_img_elm.width;
-  value.face_up_img_elm.style = 'left:'+left_style+'px';
-  CONTENT_OBJ.appendChild(value.face_up_img_elm);
+  let top = 0;
+  let left = index * value.img_elm.width;
+  value.img_elm.style.top = top+'px';
+  value.img_elm.style.left = left+'px';
+  CONTENT_OBJ.appendChild(value.img_elm);
+  
+  //ドラッグ
+  value.img_elm.ontouchstart = value.img_elm.onmousedown = function(_e){
+    //console.log(_e);
+    //console.log(this.src);
+    //console.log(value.face_up_file_name);
+    
+    //checkDoubletap();
+    
+    //クリック状態フラグ
+    isMouseDown = true;
+    
+    let eventInfo = getEventInfo(_e);
+    //console.log(eventInfo);
+    
+    startMouseDownX = eventInfo.pageX;
+    startMouseDownY = eventInfo.pageY;
+    
+    startObjDownLeft = parseInt(value.img_elm.style.left.replace('px', ''));
+    startObjDownTop = parseInt(value.img_elm.style.top.replace('px', ''));
+    
+    value.img_elm.style.zIndex = zIndexCount;
+    zIndexCount++;
+    
+    console.log('startObjDownLeft', startObjDownLeft);
+    console.log('startObjDownTop', startObjDownTop);
+    
+    if(checkDoubletap()){
+      if(this.src.indexOf(QUANTUM_CARD_BACK_COVER_FILE) != -1){
+        value.img_elm.src = QUANTUM_CARD_DIR + value.face_up_file_name;
+      }else{
+        value.img_elm.src = QUANTUM_CARD_BACK_COVER_FILE;
+      }
+    }
+    
+    return false;
+  }
+  
+  //ドラッグ終了
+  value.img_elm.ontouchend = value.img_elm.onmouseout = value.img_elm.onmouseup = function(_e){
+    if(isMouseDown === true){
+      isMouseDown = false;
+      let eventInfo = getEventInfo(_e);
+      //drawCanvas(centerX += (startMouseDownX - eventInfo.pageX) / scaleRatio, centerY += (startMouseDownY - eventInfo.pageY) / scaleRatio);
+      //centerX += (startMouseDownX - eventInfo.pageX) / scaleRatio;
+      //centerY += (startMouseDownY - eventInfo.pageY) / scaleRatio;
+      
+      //startObjDownLeft = parseInt(value.img_elm.style.left.replace('px', ''));
+      //startObjDownTop = parseInt(value.img_elm.style.top.replace('px', ''));
+      
+      let x = startObjDownLeft - (startMouseDownX - eventInfo.pageX);
+      let y = startObjDownTop - (startMouseDownY - eventInfo.pageY);
+      
+      console.log('ontouchend x', x);
+      console.log('ontouchend y', y);
+      
+      value.img_elm.style.top = y+'px';
+      value.img_elm.style.left = x+'px';
+      
+      return false;
+    }
+  }
+  
+  //ドラッグ中
+  value.img_elm.ontouchmove = value.img_elm.onmousemove = function(_e){
+    if(isMouseDown === true){
+      let eventInfo = getEventInfo(_e);
+      //drawCanvas(centerX + (startMouseDownX - eventInfo.pageX) / scaleRatio, centerY + (startMouseDownY - eventInfo.pageY) / scaleRatio);
+      //centerX + (startMouseDownX - eventInfo.pageX) / scaleRatio;
+      //centerY + (startMouseDownY - eventInfo.pageY) / scaleRatio;
+      
+      //startObjDownLeft = parseInt(value.img_elm.style.left.replace('px', ''));
+      //startObjDownTop = parseInt(value.img_elm.style.top.replace('px', ''));
+      
+      let x = startObjDownLeft - (startMouseDownX - eventInfo.pageX);
+      let y = startObjDownTop - (startMouseDownY - eventInfo.pageY);
+      
+      console.log('ontouchmove x', x);
+      console.log('ontouchmove y', y);
+      
+      value.img_elm.style.top = y+'px';
+      value.img_elm.style.left = x+'px';
+      
+      return false;
+    }
+  }
 });
+
+//ダブルタップ判定関数
+var double_tap_count = 0;
+function checkDoubletap(){
+  if(!double_tap_count){
+    //console.log('if', double_tap_count);
+    double_tap_count++;
+    //console.log('if', double_tap_count);
+    
+    //500ミリ秒以内にタップされない場合はカウンターを0にする
+    setTimeout(function () {
+      //console.log('setTimeout', double_tap_count);
+      //console.log('setTimeout', true);
+      double_tap_count = 0;
+      return false;
+    }, 500);
+  }else{
+    //500ミリ秒以内に2回目のタップがされればダブルタップと判定
+    //console.log('else', double_tap_count);
+    //console.log('else', false);
+    double_tap_count = 0;
+    return true;
+  }
+}
+
+
+//座標取得関数
+function getEventInfo(_e){
+    let dt = {
+        pageX:0,
+        pageY:0
+    };
+    
+    if(typeof _e.pageX === 'undefined'){
+        dt.pageX = _e.changedTouches[0].pageX;
+        dt.pageY = _e.changedTouches[0].pageY;
+    }else{
+        dt.pageX = _e.pageX;
+        dt.pageY = _e.pageY;
+    }
+    
+    return dt;
+}
 
 //QUANTUM_CARD_LIST.forEach(element=>{
 //  CONTENT_OBJ.appendChild(element.img_elm);
