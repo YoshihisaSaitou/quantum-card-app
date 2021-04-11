@@ -549,8 +549,8 @@ QUANTUM_CARD_LIST.forEach((value, index)=>{
   //表示処理
   //let top = 0;
   //let left = index * value.img_elm.width;
-  let top = getRandomIntInclusive(0, windowHeight + value.img_elm.height);
-  let left = getRandomIntInclusive(0, windowWidth - value.img_elm.width);
+  let top = getRandomIntInclusive(0, windowHeight / 2);
+  let left = getRandomIntInclusive(0, windowWidth / 2);
   value.img_elm.style.top = top+'px';
   value.img_elm.style.left = left+'px';
   
