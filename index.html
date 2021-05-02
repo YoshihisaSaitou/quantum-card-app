@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>クアンタムタロットカード</title>
+<link rel="shortcut icon" href="favicon.ico">
 <style>
 body{
   margin: 0px;
@@ -658,15 +659,15 @@ function checkDoubletap(){
     double_tap_count++;
     //console.log('if', double_tap_count);
     
-    //500ミリ秒以内にタップされない場合はカウンターを0にする
+    //設定したミリ秒以内にタップされない場合はカウンターを0にする
     setTimeout(function () {
       //console.log('setTimeout', double_tap_count);
       //console.log('setTimeout', true);
       double_tap_count = 0;
       return false;
-    }, 100);
+    }, 200);
   }else{
-    //500ミリ秒以内に2回目のタップがされればダブルタップと判定
+    //設定したミリ秒以内に2回目のタップがされればダブルタップと判定
     //console.log('else', double_tap_count);
     //console.log('else', false);
     double_tap_count = 0;
